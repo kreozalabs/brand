@@ -7,6 +7,9 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Brand Toolkit",
+      customCss: [
+        "./src/styles/custom.css",
+      ],
       components: {
         ThemeSelect: "./src/components/ThemeToggle.astro",
       },

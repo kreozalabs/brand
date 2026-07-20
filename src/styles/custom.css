@@ -1,0 +1,18 @@
+/* Prevent sidebar groups from collapsing.
+   Even if the browser registers the details element as closed,
+   this forces all children (except the summary header) to render and be visible. */
+.sidebar-pane details:not([open]) > :not(summary) {
+  display: block !important;
+}
+
+/* Hide the toggle arrow/caret on sidebar group headers */
+.sidebar-pane summary .caret {
+  display: none !important;
+}
+
+/* Disable pointer events on the group summary headers so they cannot be clicked to toggle */
+.sidebar-pane summary {
+  pointer-events: none;
+  cursor: default !important;
+  user-select: none;
+}
