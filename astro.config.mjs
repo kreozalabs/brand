@@ -6,14 +6,18 @@ import starlight from "@astrojs/starlight";
 export default defineConfig({
   integrations: [
     starlight({
-      title: "My Docs",
+      title: "Brand Toolkit",
       social: [
         {
           icon: "github",
           label: "GitHub",
-          href: "https://github.com/withastro/starlight",
+          href: "https://github.com/kreozalabs/brand",
         },
       ],
+      logo: {
+        src: "./public/favicon.svg",
+        alt: "Kreoza",
+      },
       sidebar: [
         {
           label: "Guides",
@@ -40,6 +44,9 @@ export default defineConfig({
           ],
         },
       ],
+      editLink: {
+        baseUrl: "https://github.com/kreozalabs/brand/edit/main/",
+      },
     }),
   ],
 });
