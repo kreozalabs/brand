@@ -9,3 +9,35 @@ hero:
       link: /guides/getting-started/
       variant: primary
 ---
+
+import { LinkCard, CardGrid } from "@astrojs/starlight/components";
+
+#### Get started with Kreoza's design guidelines
+
+<CardGrid>
+  <LinkCard
+    title="Logo"
+    href="/foundations/logo/"
+    description="Logo assets and usage guidelines for Kreoza's primary and product logo lockups"
+  />
+  <LinkCard
+    title="Typography"
+    href="/foundations/typography/"
+    description="Kreoza's own expressive typeface and how to use it"
+  />
+  <LinkCard
+    title="Color"
+    href="/foundations/color/"
+    description="How color is used and what it means for different product pillars"
+  />
+  <LinkCard
+    title="UI modes"
+    href="/foundations/ui-modes/"
+    description="Kreoza's different UI modes for better UX and how to use them"
+  />
+  <LinkCard
+    title="Accessibility"
+    href="/foundations/accessibility/"
+    description="Accessibility guidelines for color contrast, touch target sizes, and keyboard focus states"
+  />
+</CardGrid>
