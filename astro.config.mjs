@@ -7,6 +7,9 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Brand Toolkit",
+      components: {
+        ThemeSelect: "./src/components/ThemeToggle.astro",
+      },
       social: [
         {
           icon: "github",

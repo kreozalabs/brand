@@ -1,0 +1,162 @@
+---
+/* ThemeToggle.astro */
+import { Icon } from "@astrojs/starlight/components";
+---
+
+{/* Inlined to avoid FOUC */}
+<script is:inline>
+  StarlightThemeProvider.updatePickers();
+</script>
+
+<script>
+  type Theme = "dark" | "light";
+
+  const storageKey = "kreoza-theme";
+
+  /** Get system theme fallback */
+  const getPreferredColorScheme = (): Theme =>
+    matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+
+  /** Load saved theme or fall back to system theme */
+  const loadTheme = (): Theme => {
+    if (typeof localStorage !== "undefined") {
+      const saved = localStorage.getItem(storageKey);
+      if (saved === "dark" || saved === "light") return saved;
+    }
+    return getPreferredColorScheme();
+  };
+
+  /** Store choice in localStorage */
+  function storeTheme(theme: Theme): void {
+    if (typeof localStorage !== "undefined") {
+      localStorage.setItem(storageKey, theme);
+    }
+  }
+
+  /** Apply theme to document */
+  function applyTheme(theme: Theme): void {
+    document.documentElement.dataset.theme = theme;
+    StarlightThemeProvider.updatePickers?.(theme);
+    storeTheme(theme);
+  }
+
+  /** Toggle between dark and light */
+  function toggleTheme(): void {
+    const currentTheme = loadTheme();
+    const nextTheme: Theme = currentTheme === "dark" ? "light" : "dark";
+    applyTheme(nextTheme);
+  }
+
+  // React to OS dark/light mode changes if no manual choice was set
+  matchMedia("(prefers-color-scheme: light)").addEventListener("change", () => {
+    if (
+      typeof localStorage !== "undefined" &&
+      !localStorage.getItem(storageKey)
+    ) {
+      applyTheme(getPreferredColorScheme());
+    }
+  });
+
+  class StarlightThemeToggle extends HTMLElement {
+    constructor() {
+      super();
+      // Apply initial theme on load
+      applyTheme(loadTheme());
+
+      // Toggle on button click
+      this.querySelector("button")?.addEventListener("click", () => {
+        toggleTheme();
+      });
+    }
+  }
+
+  customElements.define("starlight-theme-toggle", StarlightThemeToggle);
+</script>
+
+<starlight-theme-toggle>
+  <button
+    type="button"
+    aria-label="Toggle theme"
+    title="Toggle dark/light mode"
+  >
+    <Icon name="sun" class="icon-sun" />
+    <Icon name="moon" class="icon-moon" />
+    <span class="sr-only">Toggle theme</span>
+  </button>
+</starlight-theme-toggle>
+
+<style>
+  @layer starlight.core {
+    button {
+      background: transparent;
+      border: none;
+      color: var(--sl-color-text-accent);
+      padding: 0.5em;
+      margin: -0.5em;
+      cursor: pointer;
+      font-size: inherit;
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: color 0.2s ease;
+    }
+
+    button:hover {
+      color: var(--sl-color-white);
+    }
+  }
+
+  .icon-sun,
+  .icon-moon {
+    transform-origin: center;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  button:hover .icon-sun,
+  button:hover .icon-moon {
+    transform: scale(1.12) rotate(15deg);
+  }
+
+  button:active .icon-sun,
+  button:active .icon-moon {
+    transform: scale(0.9) rotate(-5deg);
+  }
+
+  /* Theme display logic with entry animations */
+  :global([data-theme="dark"]) .icon-sun {
+    display: none;
+  }
+  :global([data-theme="dark"]) .icon-moon {
+    display: block;
+    animation: theme-entry 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+
+  :global([data-theme="light"]) .icon-sun {
+    display: block;
+    animation: theme-entry 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  :global([data-theme="light"]) .icon-moon {
+    display: none;
+  }
+
+  @keyframes theme-entry {
+    from {
+      transform: scale(0.5) rotate(-45deg);
+      opacity: 0;
+    }
+  }
+
+  /* Screen reader helper */
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+  }
+</style>
