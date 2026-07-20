@@ -11,7 +11,7 @@ import { Icon } from "@astrojs/starlight/components";
 <script>
   type Theme = "dark" | "light";
 
-  const storageKey = "kreoza-theme";
+  const storageKey = "starlight-theme";
 
   /** Get system theme fallback */
   const getPreferredColorScheme = (): Theme =>
@@ -44,6 +44,21 @@ import { Icon } from "@astrojs/starlight/components";
   function toggleTheme(event?: MouseEvent): void {
     const currentTheme = loadTheme();
     const nextTheme: Theme = currentTheme === "dark" ? "light" : "dark";
+
+    const sunIcon = document.querySelector("starlight-theme-toggle .icon-sun");
+    const moonIcon = document.querySelector(
+      "starlight-theme-toggle .icon-moon",
+    );
+    sunIcon?.classList.add("animate-icon");
+    moonIcon?.classList.add("animate-icon");
+
+    const cleanup = () => {
+      sunIcon?.classList.remove("animate-icon");
+      moonIcon?.classList.remove("animate-icon");
+    };
+    sunIcon?.addEventListener("animationend", cleanup, { once: true });
+    moonIcon?.addEventListener("animationend", cleanup, { once: true });
+    setTimeout(cleanup, 400); // Safety fallback
 
     const isTransitionSupported =
       typeof document !== "undefined" &&
@@ -176,21 +191,24 @@ import { Icon } from "@astrojs/starlight/components";
     transform: scale(0.9) rotate(-5deg);
   }
 
-  /* Theme display logic with entry animations */
+  /* Theme display logic */
   :global([data-theme="dark"]) .icon-sun {
     display: none;
   }
   :global([data-theme="dark"]) .icon-moon {
     display: block;
-    animation: theme-entry 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   :global([data-theme="light"]) .icon-sun {
     display: block;
-    animation: theme-entry 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
   :global([data-theme="light"]) .icon-moon {
     display: none;
+  }
+
+  /* Only animate when toggled */
+  .animate-icon {
+    animation: theme-entry 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   @keyframes theme-entry {
