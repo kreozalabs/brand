@@ -1,6 +1,7 @@
 ---
 title: Brand Attributes
-description: The core principles, mission, and character of Kreoza.
+description: Core characteristics defining Kreoza's personality across design, communication, and product.
+draft: true
 ---
 
 Page content

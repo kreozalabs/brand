@@ -35,14 +35,9 @@ export default defineConfig({
           label: "Brand Identity",
           items: [
             {
-              label: "Brand Attributes",
-              slug: "brand-identity/brand-attributes",
-            },
-            {
               label: "Co-branding",
               slug: "brand-identity/co-branding",
             },
-            { label: "Voice and Tone", slug: "brand-identity/voice-and-tone" },
           ],
         },
         {
