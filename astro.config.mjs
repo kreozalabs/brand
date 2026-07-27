@@ -7,9 +7,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Brand Toolkit",
-      customCss: [
-        "./src/styles/custom.css",
-      ],
+      customCss: ["./src/styles/custom.css"],
       components: {
         ThemeSelect: "./src/components/ThemeToggle.astro",
       },
@@ -21,8 +19,9 @@ export default defineConfig({
         },
       ],
       logo: {
-        src: "./public/favicon.svg",
         alt: "Kreoza",
+        light: "./public/favicon.svg",
+        dark: "./public/favicon.svg", // TODO: Set a new icon that works with dark mode
       },
       sidebar: [
         {
