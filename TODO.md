@@ -1,2 +1,2 @@
 - [ ] Add contact email address for requesting co-branding & trademark approval to /src/content/docs/brand-identity/co-branding.md
-- [ ]
+- [ ] Set a new icon that works with dark mode: astro.config.mjs

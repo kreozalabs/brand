@@ -9,10 +9,10 @@ Kreoza provides a **default color palette** for the organization. Each product i
 
 ## Default Palette & Theme Generator
 
-Our default palette is initialized from the [shadcn/ui Neutral/Radix Preset](https://ui.shadcn.com/create?preset=bciwM7zk&rtl=true&base=radix) (`preset=bciwM7zk`) using OKLCH color space.
+Our default palette is initialized from the [shadcn/ui Neutral Preset](https://ui.shadcn.com/create?preset=bciwM7zk&rtl=true) (`preset=bciwM7zk`) using OKLCH color space.
 
 :::tip[Interactive Theme Generator]
-You can inspect or test the underlying theme structure directly using the [shadcn Theme Generator](https://ui.shadcn.com/create?preset=bciwM7zk&rtl=true&base=radix).
+You can inspect or test the underlying theme structure directly using the [shadcn Theme Generator](https://ui.shadcn.com/create?preset=bciwM7zk&rtl=true).
 :::
 
 ---
