@@ -48,7 +48,6 @@ export default defineConfig({
             { label: "Color", slug: "foundations/color" },
             { label: "Logo", slug: "foundations/logo" },
             { label: "Typography", slug: "foundations/typography" },
-            { label: "UI Modes", slug: "foundations/ui-modes" },
           ],
         },
       ],
