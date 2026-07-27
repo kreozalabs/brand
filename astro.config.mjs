@@ -26,7 +26,10 @@ export default defineConfig({
       sidebar: [
         {
           label: "Guides",
-          items: [{ label: "Getting Started", slug: "guides/getting-started" }],
+          items: [
+            { label: "Getting Started", slug: "guides/getting-started" },
+            { label: "Customization", slug: "guides/customization" },
+          ],
         },
         {
           label: "Brand Identity",
