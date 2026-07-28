@@ -8,6 +8,7 @@ export default defineConfig({
   integrations: [
     starlight({
       title: "Brand Toolkit",
+      favicon: "/favicon.svg",
       customCss: ["./src/styles/custom.css"],
       components: {
         ThemeSelect: "./src/components/ThemeToggle.astro",
