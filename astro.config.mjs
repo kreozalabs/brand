@@ -21,8 +21,8 @@ export default defineConfig({
       ],
       logo: {
         alt: "Kreoza",
-        light: "./public/favicon.svg",
-        dark: "./public/favicon.svg", // TODO: Set a new icon that works with dark mode
+        light: "./src/assets/logos/logo.svg",
+        dark: "./src/assets/logos/logo-light.svg",
       },
       sidebar: [
         {
